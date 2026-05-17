@@ -1,5 +1,7 @@
 # nginx-http-starter
 
+[![View on KikPlate](https://img.shields.io/static/v1?label=KikPlate&message=nginx-http-starter&color=0366d6&style=flat-square)](https://kikplate.dev/plates/nginx-http-starter)
+
 A minimal NGINX static server starter for local development and Docker deployment.
 
 ## Features
