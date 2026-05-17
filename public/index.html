@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nginx-http-starter</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Arial;
+      background: #ffffff;
+      color: #111827;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    header {
+      margin-bottom: 48px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 24px;
+    }
+
+    .badge {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #6b7280;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #4b5563;
+      max-width: 600px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .card h2 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #6b7280;
+    }
+
+    .actions {
+      margin-top: 40px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid #e5e7eb;
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.15s ease;
+      color: #111827;
+    }
+
+    .btn:hover {
+      background: #f9fafb;
+    }
+
+    .btn-primary {
+      background: #111827;
+      color: white;
+      border-color: #111827;
+    }
+
+    .btn-primary:hover {
+      background: #000;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 12px;
+      color: #6b7280;
+    }
+
+    /* MODAL */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal {
+      width: 420px;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+      padding: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .modal h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-top: 10px;
+      padding: 10px 0;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .modal-actions {
+      margin-top: 14px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal {
+        width: 92%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <header>
+      <div class="badge">NGINX HTTP STARTER</div>
+      <h1>nginx-http-starter</h1>
+      <p>Minimal static server starter with clean structure and production-ready NGINX config.</p>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Fast</h2>
+        <p>Instant static file serving via NGINX.</p>
+      </div>
+
+      <div class="card">
+        <h2>Portable</h2>
+        <p>Works on any system without changes.</p>
+      </div>
+
+      <div class="card">
+        <h2>Clean</h2>
+        <p>No frameworks, minimal configuration.</p>
+      </div>
+
+      <div class="card">
+        <h2>Reliable</h2>
+        <p>Production-ready baseline setup.</p>
+      </div>
+    </div>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="https://nginx.org" target="_blank">NGINX</a>
+      <a class="btn" href="https://docker.com" target="_blank">Docker</a>
+      <button class="btn" onclick="openModal()">Status</button>
+    </div>
+
+    <footer>
+      Ready for kikplate.dev
+    </footer>
+  </div>
+
+  <!-- MODAL -->
+  <div class="overlay" id="overlay" onclick="closeModal(event)">
+    <div class="modal">
+      <h3>Server Status</h3>
+
+      <div class="status-row">
+        <span><span class="dot"></span>nginx</span>
+        <span>running</span>
+      </div>
+
+      <div class="status-row">
+        <span>port</span>
+        <span>8080</span>
+      </div>
+
+      <div class="status-row">
+        <span>mode</span>
+        <span>static</span>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("overlay").style.display = "flex";
+    }
+
+    function closeModal(e) {
+      if (!e || e.target.id === "overlay") {
+        document.getElementById("overlay").style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
