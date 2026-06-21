@@ -72,31 +72,31 @@ modules:
 
 files:
   - path: .dockerignore
-    template: templates/.dockerignore.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/.dockerignore.tmpl
     condition: modules.docker.enabled
   - path: .editorconfig
-    template: templates/.editorconfig.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/.editorconfig.tmpl
   - path: .gitignore
-    template: templates/.gitignore.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/.gitignore.tmpl
   - path: LICENSE
-    template: templates/LICENSE.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/LICENSE.tmpl
   - path: README.md
-    template: templates/README.md.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/README.md.tmpl
   - path: conf.d/active.conf
-    template: templates/conf.d/active.conf.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/conf.d/active.conf.tmpl
   - path: conf.d/dev.conf
-    template: templates/conf.d/dev.conf.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/conf.d/dev.conf.tmpl
   - path: conf.d/prod.conf
-    template: templates/conf.d/prod.conf.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/conf.d/prod.conf.tmpl
   - path: docker-compose.yaml
-    template: templates/docker-compose.yaml.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/docker-compose.yaml.tmpl
     condition: modules.docker.enabled
   - path: dockerFile
-    template: templates/dockerFile.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/dockerFile.tmpl
     condition: modules.docker.enabled
   - path: mime.types
-    template: templates/mime.types.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/mime.types.tmpl
   - path: nginx.conf
-    template: templates/nginx.conf.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/nginx.conf.tmpl
   - path: public/index.html
-    template: templates/public/index.html.tmpl
+    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/public/index.html.tmpl
