@@ -72,31 +72,31 @@ modules:
 
 files:
   - path: .dockerignore
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/.dockerignore.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/.dockerignore.tmpl
     condition: modules.docker.enabled
   - path: .editorconfig
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/.editorconfig.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/.editorconfig.tmpl
   - path: .gitignore
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/.gitignore.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/.gitignore.tmpl
   - path: LICENSE
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/LICENSE.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/LICENSE.tmpl
   - path: README.md
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/README.md.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/README.md.tmpl
   - path: conf.d/active.conf
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/conf.d/active.conf.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/conf.d/active.conf.tmpl
   - path: conf.d/dev.conf
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/conf.d/dev.conf.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/conf.d/dev.conf.tmpl
   - path: conf.d/prod.conf
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/conf.d/prod.conf.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/conf.d/prod.conf.tmpl
   - path: docker-compose.yaml
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/docker-compose.yaml.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/docker-compose.yaml.tmpl
     condition: modules.docker.enabled
   - path: dockerFile
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/dockerFile.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/dockerFile.tmpl
     condition: modules.docker.enabled
   - path: mime.types
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/mime.types.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/mime.types.tmpl
   - path: nginx.conf
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/nginx.conf.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/nginx.conf.tmpl
   - path: public/index.html
-    template: https://github.com/kikplate/nginx-http-server-starter/main/templates/public/index.html.tmpl
+    template: https://raw.githubusercontent.com/kikplate/nginx-http-server-starter/main/templates/public/index.html.tmpl
