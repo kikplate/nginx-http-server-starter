@@ -1,0 +1,18 @@
+server {
+    listen {{ .containerPort }};
+    server_name _;
+
+    root {{ .containerRoot }};
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    {{ if .modules.cacheHeaders.enabled }}
+    location ~* \.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2)$ {
+        expires {{ .prodCacheExpires }};
+        add_header Cache-Control "public, max-age={{ .prodCacheMaxAge }}, immutable";
+    }
+    {{ end }}
+}

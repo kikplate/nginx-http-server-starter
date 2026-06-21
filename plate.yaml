@@ -1,0 +1,102 @@
+name: nginx-http-server-starter
+owner: kikplate-public
+verification_token: d4864f00-8988-42bf-aa1d-54ea18146f76
+description: Minimal production-ready NGINX static HTTP server with modular config and clean structure.
+version: 1.0.0
+
+category: backend
+
+tags:
+  - nginx
+  - http
+  - static
+  - starter
+  - boilerplate
+  - web-server
+
+schema:
+  projectName:
+    type: string
+    default: nginx-http-starter
+  projectDescription:
+    type: string
+    default: Minimal static server starter with clean structure and production-ready NGINX config.
+  kikplateSlug:
+    type: string
+    default: nginx-http-starter
+  kikplateBadgeColor:
+    type: string
+    default: 0366d6
+  localPort:
+    type: int
+    default: 8080
+  containerPort:
+    type: int
+    default: 80
+  containerName:
+    type: string
+    default: anginx-http-starter
+  nginxImage:
+    type: string
+    default: nginx:stable-alpine
+  workerConnections:
+    type: int
+    default: 1024
+  keepaliveTimeout:
+    type: int
+    default: 65
+  gzipEnabled:
+    type: bool
+    default: true
+  gzipMinLength:
+    type: int
+    default: 1024
+  localRoot:
+    type: string
+    default: ./public
+  containerRoot:
+    type: string
+    default: /usr/share/nginx/html
+  prodCacheExpires:
+    type: string
+    default: 30d
+  prodCacheMaxAge:
+    type: int
+    default: 2592000
+
+modules:
+  docker:
+    enabled: true
+  cacheHeaders:
+    enabled: true
+
+files:
+  - path: .dockerignore
+    template: templates/.dockerignore.tmpl
+    condition: modules.docker.enabled
+  - path: .editorconfig
+    template: templates/.editorconfig.tmpl
+  - path: .gitignore
+    template: templates/.gitignore.tmpl
+  - path: LICENSE
+    template: templates/LICENSE.tmpl
+  - path: README.md
+    template: templates/README.md.tmpl
+  - path: conf.d/active.conf
+    template: templates/conf.d/active.conf.tmpl
+  - path: conf.d/dev.conf
+    template: templates/conf.d/dev.conf.tmpl
+  - path: conf.d/prod.conf
+    template: templates/conf.d/prod.conf.tmpl
+  - path: docker-compose.yaml
+    template: templates/docker-compose.yaml.tmpl
+    condition: modules.docker.enabled
+  - path: dockerFile
+    template: templates/dockerFile.tmpl
+    condition: modules.docker.enabled
+  - path: mime.types
+    template: templates/mime.types.tmpl
+  - path: nginx.conf
+    template: templates/nginx.conf.tmpl
+  - path: public/index.html
+    template: templates/public/index.html.tmpl

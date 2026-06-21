@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>nginx-http-starter</title>
+  <title>{{ .projectName }}</title>
 
   <style>
     * {
@@ -177,9 +177,14 @@
 
   <div class="container">
     <header>
-      <div class="badge">NGINX HTTP STARTER</div>
-      <h1>nginx-http-starter</h1>
-      <p>Minimal static server starter with clean structure and production-ready NGINX config.</p>
+      <h1>{{ .projectName }}</h1>
+      <div style="margin-top: 10px;">
+        <a href="https://kikplate.dev/plates/{{ .kikplateSlug }}" target="_blank">
+          <img src="https://img.shields.io/static/v1?label=KikPlate&message={{ .kikplateSlug }}&color={{ .kikplateBadgeColor }}&style=flat-square" alt="View on KikPlate">
+        </a>
+      </div>
+      <p>{{ .projectDescription }}</p>
+      
     </header>
 
     <div class="grid">
@@ -206,7 +211,9 @@
 
     <div class="actions">
       <a class="btn btn-primary" href="https://nginx.org" target="_blank">NGINX</a>
+      {{ if .modules.docker.enabled }}
       <a class="btn" href="https://docker.com" target="_blank">Docker</a>
+      {{ end }}
       <button class="btn" onclick="openModal()">Status</button>
     </div>
 
@@ -227,7 +234,7 @@
 
       <div class="status-row">
         <span>port</span>
-        <span>8080</span>
+        <span>{{ .localPort }}</span>
       </div>
 
       <div class="status-row">
