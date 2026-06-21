@@ -1,0 +1,26 @@
+projectName: nginx-http-starter
+projectDescription: Minimal static server starter with clean structure and production-ready NGINX config.
+kikplateSlug: nginx-http-starter
+kikplateBadgeColor: 0366d6
+
+localPort: 8080
+containerPort: 80
+containerName: anginx-http-starter
+nginxImage: nginx:stable-alpine
+
+workerConnections: 1024
+keepaliveTimeout: 65
+gzipEnabled: true
+gzipMinLength: 1024
+
+localRoot: ./public
+containerRoot: /usr/share/nginx/html
+
+prodCacheExpires: 30d
+prodCacheMaxAge: 2592000
+
+modules:
+  docker:
+    enabled: true
+  cacheHeaders:
+    enabled: true

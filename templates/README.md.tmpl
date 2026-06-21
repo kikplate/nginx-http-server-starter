@@ -1,0 +1,163 @@
+# {{ .projectName }}
+
+[![View on KikPlate](https://img.shields.io/static/v1?label=KikPlate&message={{ .kikplateSlug }}&color={{ .kikplateBadgeColor }}&style=flat-square)](https://kikplate.dev/plates/{{ .kikplateSlug }})
+
+{{ .projectDescription }}
+
+## Features
+
+- Static file hosting from `public/`
+- Native NGINX workflow for local development
+{{ if .modules.docker.enabled }}
+- Docker and Docker Compose support
+{{ end }}
+{{ if .gzipEnabled }}
+- Gzip enabled in HTTP config
+{{ end }}
+{{ if .modules.cacheHeaders.enabled }}
+- Cache headers for common static assets
+{{ end }}
+- Clean, small starter structure
+
+## Project Structure
+
+```text
+{{ .projectName | slugify }}/
+├── .dockerignore
+├── .editorconfig
+├── .gitignore
+├── LICENSE
+├── README.md
+├── conf.d/
+│   ├── active.conf
+│   ├── dev.conf
+│   └── prod.conf
+{{ if .modules.docker.enabled }}
+├── docker-compose.yaml
+├── dockerFile
+{{ end }}
+├── mime.types
+├── nginx.conf
+└── public/
+    └── index.html
+```
+
+## Quick Start
+
+Use one of the two options below.
+
+## Option A: Native NGINX (Local)
+
+Local NGINX uses `conf.d/active.conf`. By default, this starter keeps `active.conf` aligned with `dev.conf`.
+
+### Start
+
+From the project root:
+
+```bash
+nginx -c $(pwd)/nginx.conf -p $(pwd)
+```
+
+Open: http://localhost:{{ .localPort }}
+
+### Switch Environment
+
+Use one config at a time by copying it into `conf.d/active.conf`.
+
+Development:
+
+```bash
+cp conf.d/dev.conf conf.d/active.conf
+nginx -t -c $(pwd)/nginx.conf -p $(pwd)
+nginx -s reload -c $(pwd)/nginx.conf -p $(pwd)
+```
+
+Production:
+
+```bash
+cp conf.d/prod.conf conf.d/active.conf
+nginx -t -c $(pwd)/nginx.conf -p $(pwd)
+nginx -s reload -c $(pwd)/nginx.conf -p $(pwd)
+```
+
+Note: `dev.conf` listens on port `{{ .localPort }}` and serves from `{{ .localRoot }}`. `prod.conf` listens on port `{{ .containerPort }}` and serves from `{{ .containerRoot }}`, which is intended for the container image.
+
+### Validate Config
+
+```bash
+nginx -t -c $(pwd)/nginx.conf -p $(pwd)
+```
+
+### Reload After Config Changes
+
+```bash
+nginx -s reload -c $(pwd)/nginx.conf -p $(pwd)
+```
+
+### Stop
+
+```bash
+nginx -s stop -c $(pwd)/nginx.conf -p $(pwd)
+```
+
+{{ if .modules.docker.enabled }}
+## Option B: Docker
+
+Docker always uses the production server config during image build.
+
+### Run With Compose
+
+```bash
+docker compose -f docker-compose.yaml up --build
+```
+
+Open: http://localhost:{{ .localPort }}
+
+### Stop Compose
+
+```bash
+docker compose -f docker-compose.yaml down
+```
+
+### Build and Run Manually
+
+```bash
+docker build -f dockerFile -t {{ .projectName | slugify }} .
+docker run --rm -p {{ .localPort }}:{{ .containerPort }} {{ .projectName | slugify }}
+```
+{{ end }}
+
+## Configuration Notes
+
+- Main config: `nginx.conf`
+- Active server config: `conf.d/active.conf`
+- Development server config: `conf.d/dev.conf`
+- Production server config: `conf.d/prod.conf`
+- MIME definitions: `mime.types`
+- Static content: `public/index.html`
+
+Native mode loads only `conf.d/active.conf`, which prevents duplicate server blocks and avoids conflicting `server_name` warnings during reload.
+
+{{ if .modules.docker.enabled }}
+Docker mode maps host `{{ .localPort }}` to container `{{ .containerPort }}` (`docker-compose.yaml`) and the image build copies `prod.conf` to `active.conf` automatically.
+{{ end }}
+
+## Development Flow
+
+```bash
+# 1) Start locally
+nginx -c $(pwd)/nginx.conf -p $(pwd)
+
+# 2) Edit files
+#    - public/index.html
+#    - conf.d/dev.conf or conf.d/prod.conf
+#    - conf.d/active.conf
+#    - nginx.conf
+
+# 3) Validate and reload
+nginx -t -c $(pwd)/nginx.conf -p $(pwd)
+nginx -s reload -c $(pwd)/nginx.conf -p $(pwd)
+
+# 4) Stop
+nginx -s stop -c $(pwd)/nginx.conf -p $(pwd)
+```
