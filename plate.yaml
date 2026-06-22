@@ -18,33 +18,43 @@ schema:
   projectName:
     type: string
     default: nginx-http-starter
+    required: true
   projectDescription:
     type: string
     default: Minimal static server starter with clean structure and production-ready NGINX config.
+    required: true
   kikplateSlug:
     type: string
     default: nginx-http-starter
+    required: true
   kikplateBadgeColor:
     type: string
     default: 0366d6
+    required: true
   localPort:
     type: int
     default: 8080
+    required: true
   containerPort:
     type: int
     default: 80
+    required: true
   containerName:
     type: string
     default: anginx-http-starter
+    required: true
   nginxImage:
     type: string
     default: nginx:stable-alpine
+    required: true
   workerConnections:
     type: int
     default: 1024
+    required: true
   keepaliveTimeout:
     type: int
     default: 65
+    required: true
   gzipEnabled:
     type: bool
     default: true
@@ -54,9 +64,11 @@ schema:
   localRoot:
     type: string
     default: ./public
+    required: true
   containerRoot:
     type: string
     default: /usr/share/nginx/html
+    required: true
   prodCacheExpires:
     type: string
     default: 30d
